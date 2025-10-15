@@ -59,7 +59,13 @@ fn calculate(first_number: f64, operator: char, second_number: f64) -> Option<f6
         '+' => Some(first_number + second_number),
         '-' => Some(first_number - second_number),
         '*' => Some(first_number * second_number),
-        '/' => if second_number != 0.0 { Some(first_number / second_number) } else { None }
+        '/' => {
+            if second_number != 0.0 {
+                Some(first_number / second_number)
+            } else {
+                None
+            }
+        }
         _ => unreachable!(),
     }
 }

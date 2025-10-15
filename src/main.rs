@@ -2,7 +2,8 @@ mod tasks;
 
 const AUTO_GUESS_NUMBER_TASK_AVAILABLE: bool = false;
 const MANUAL_GUESS_NUMBER_TASK_AVAILABLE: bool = false;
-const CALC_TASK_AVAILABLE: bool = true;
+const CALC_TASK_AVAILABLE: bool = false;
+const FIZZ_BUZZ_TASK_AVAILABLE: bool = true;
 
 fn main() {
     if AUTO_GUESS_NUMBER_TASK_AVAILABLE {
@@ -20,6 +21,12 @@ fn main() {
     if CALC_TASK_AVAILABLE {
         println!("[CALC TASK]\n");
         tasks::calc_task::run();
+        println!("==========================================\n\n\n");
+    }
+
+    if FIZZ_BUZZ_TASK_AVAILABLE {
+        println!("[FIZZ_BUZZ TASK]\n");
+        tasks::fizz_buzz_task::run();
         println!("==========================================\n\n\n");
     }
 }
