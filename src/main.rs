@@ -1,32 +1,40 @@
 mod tasks;
 
-const AUTO_GUESS_NUMBER_TASK_AVAILABLE: bool = false;
-const MANUAL_GUESS_NUMBER_TASK_AVAILABLE: bool = false;
-const CALC_TASK_AVAILABLE: bool = false;
-const FIZZ_BUZZ_TASK_AVAILABLE: bool = true;
+struct Task {
+    name: &'static str,
+    enabled: bool,
+    run: fn(),
+}
 
 fn main() {
-    if AUTO_GUESS_NUMBER_TASK_AVAILABLE {
-        println!("[AUTO_GUESS_NUMBER TASK]\n");
-        tasks::guess_number_task::run_auto();
-        println!("==========================================\n\n\n");
-    }
+    let tasks = [
+        Task {
+            name: "AUTO_GUESS_NUMBER_TASK",
+            enabled: false,
+            run: tasks::guess_number_task::run_auto,
+        },
+        Task {
+            name: "MANUAL_GUESS_NUMBER_TASK",
+            enabled: false,
+            run: tasks::guess_number_task::run_manual,
+        },
+        Task {
+            name: "CALC_TASK",
+            enabled: false,
+            run: tasks::calc_task::run,
+        },
+        Task {
+            name: "FIZZ_BUZZ_TASK",
+            enabled: true,
+            run: tasks::fizz_buzz_task::run,
+        },
+    ];
 
-    if MANUAL_GUESS_NUMBER_TASK_AVAILABLE {
-        println!("[MANUAL_GUESS_NUMBER TASK]\n");
-        tasks::guess_number_task::run_manual();
-        println!("==========================================\n\n\n");
-    }
-
-    if CALC_TASK_AVAILABLE {
-        println!("[CALC TASK]\n");
-        tasks::calc_task::run();
-        println!("==========================================\n\n\n");
-    }
-
-    if FIZZ_BUZZ_TASK_AVAILABLE {
-        println!("[FIZZ_BUZZ TASK]\n");
-        tasks::fizz_buzz_task::run();
-        println!("==========================================\n\n\n");
+    for task in tasks {
+        if task.enabled {
+            println!("{} TASK\n", task.name);
+            (task.run)();
+            println!("==========================================\n\n\n");
+        }
     }
 }
